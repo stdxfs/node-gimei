@@ -1,9 +1,12 @@
 {
   "name": "gimei",
-  "version": "1.0.0",
-  "description": "random Japanese name and address generator. nodejs port of gimei",
-  "main": "index.js",
+  "version": "2.0.0",
+  "description": "Random Japanese name and address generator. Node.js port of gimei with TypeScript support.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
     "test": "jasmine",
     "test:generate": "jasmine spec/complete_info_spec.js"
   },
@@ -14,11 +17,17 @@
   "keywords": [
     "gimei",
     "japanese",
-    "name,",
+    "name",
     "address",
-    "generator"
+    "generator",
+    "faker",
+    "typescript",
+    "random"
   ],
   "author": "demiglacesource",
+  "contributors": [
+    "stdxfs"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/stdxfs/node-gimei/issues"
@@ -28,6 +37,9 @@
     "js-yaml": "^4.1.0"
   },
   "devDependencies": {
-    "jasmine": "^5.9.0"
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^24.2.0",
+    "jasmine": "^5.9.0",
+    "typescript": "^5.9.2"
   }
 }

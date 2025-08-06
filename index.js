@@ -1,1 +1,1 @@
-module.exports = require('./lib/gimei');
+export * from './lib/gimei';
