@@ -2,8 +2,12 @@
   "name": "gimei",
   "version": "2.0.0",
   "description": "Random Japanese name and address generator. Node.js port of gimei with TypeScript support.",
-  "main": "dist/index.js",
+  "main": "index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "lib/**",
+    "index.js"
+  ],
   "scripts": {
     "build": "tsc",
     "prepublishOnly": "npm run build",

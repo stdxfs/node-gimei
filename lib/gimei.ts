@@ -19,25 +19,22 @@ export interface AddressData {
     };
 }
 
-export interface GimeType {
-    nameObj: name.NameType | null;
-    addressObj: address.AddressType | null;
+export interface GimeiType {
+    nameData: NameData;
+    addressData: AddressData;
     name(): name.NameType;
     male(): name.NameType;
     female(): name.NameType;
     address(): address.AddressType;
 }
 
-export const gimei: GimeType = {
-    nameObj: null,
-    addressObj: null,
+export const gimei: GimeiType = {
+    // 缓存数据文件，实例每次新建
+    nameData: yaml.load(fs.readFileSync(__dirname + '/../lib/data/names.yml', 'utf8')) as NameData,
+    addressData: yaml.load(fs.readFileSync(__dirname + '/../lib/data/addresses.yml', 'utf8')) as AddressData,
 
     name(): name.NameType {
-        if (this.nameObj === null) {
-            const names = yaml.load(fs.readFileSync(__dirname + '/../lib/data/names.yml', 'utf8')) as NameData;
-            this.nameObj = name.setName(names as any).setGender(Math.round(Math.random() + 1) === 1 ? 'male' : 'female');
-        }
-        return this.nameObj;
+        return name.setName(this.nameData as any).setGender(Math.random() < 0.5 ? 'male' : 'female');
     },
 
     male(): name.NameType {
@@ -49,11 +46,7 @@ export const gimei: GimeType = {
     },
 
     address(): address.AddressType {
-        if (this.addressObj === null) {
-            const addresses = yaml.load(fs.readFileSync(__dirname + '/../lib/data/addresses.yml', 'utf8')) as AddressData;
-            this.addressObj = address.setAddresses(addresses as any);
-        }
-        return this.addressObj;
+        return address.setAddresses(this.addressData as any);
     }
 };
 
